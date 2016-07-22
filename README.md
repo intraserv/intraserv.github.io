@@ -1,2 +1,2 @@
 # intraserv.github.io
-website
+this is the main repository for my website lmao.
