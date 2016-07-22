@@ -1,0 +1,359 @@
+<html>
+<head>
+	<title>termlib Sample Parser</title>
+	<script language="JavaScript" type="text/javascript" src="termlib.js"></script>
+	<script language="JavaScript" type="text/javascript" src="termlib_parser.js"></script>
+
+<script language="JavaScript" type="text/javascript">
+<!--
+
+/*
+  test sample for termlib.js and termlib_parser.js
+
+  (c) Norbert Landsteiner 2005-2010
+  mass:werk - media environments
+  <http://www.masswerk.at>
+
+*/
+
+var term, parser;
+
+var helpPage=[
+	'%CS%+r Parser Help %-r%n',
+	' ',
+	'  Use one of the following commands:',
+	'     clear [-a] .......... clear the terminal',
+	'                           option "a" also removes the status line',
+	'     number -n<value> .... return value of option "n" (test for options)',
+	'     repeat -n<value> .... repeats the first argument n times (another test)',
+	'     dump <data> ................ dumps the specific data into ram',
+	'     login <username> .... gain full sccess using credentials.',
+	'     exit ................ close the terminal (same as <ESC>)',
+	'     help ................ show this help page',
+	' ',
+	'  other input will be echoed to the terminal as a list of parsed arguments',
+	'  in the format <argument index> <quoting level> "<parsed value>".',
+	' '
+];
+
+function termOpen() {
+	if (!term || term.losed) {
+		term=new Terminal(
+			{
+				x: 220,
+				y: 70,
+				termDiv: 'termDiv',
+				ps: '[unauthed]$ ~>',
+				initHandler: termInitHandler,
+				handler: commandHandler,
+				exitHandler: termExitHandler
+			}
+		);
+		if (term) term.open();
+		parser=new Parser();
+	
+		// dimm UI text
+		var mainPane = (document.getElementById)?
+			document.getElementById('mainPane') : document.all.mainPane;
+		if (mainPane
+			) mainPane.className = 'lh15 dimmed';
+	}
+	else {
+		term.focus();
+	}
+}
+
+function termExitHandler() {
+	// reset the UI
+	var mainPane = (document.getElementById)?
+		document.getElementById('mainPane') : document.all.mainPane;
+	if (mainPane) mainPane.className = 'lh15';
+}
+
+function termInitHandler() {
+	// output a start up screen
+	this.write(
+		[
+			this.globals.center('####################################################', 80),
+			this.globals.center('#                                                  #', 80),
+			this.globals.center('#         GibbonsDOTio Parser version 1.4A         #', 80),
+			this.globals.center('# Typed input is echoed as parsed arguments as is. #', 80),
+			this.globals.center('#                                                  #', 80),
+			this.globals.center('#  Type "help" for commands.                       #', 80),
+			this.globals.center('#                                                  #', 80),
+			this.globals.center('#  (c) B. Gibbons 2013-2016; GIBBONS.IO/~term/     #', 80),
+			this.globals.center('#                                                  #', 80),
+			this.globals.center('####################################################', 80),
+			'%n'
+		]
+	);
+	// set a double status line
+	this.statusLine('', 8,2); // just a line of strike
+	this.statusLine(' +++ Test sample for arg. parsing. Type "help" for Help. +++');
+	this.maxLines -= 2;
+	// and leave with prompt
+	this.prompt();
+}
+
+function commandHandler() {
+	this.newLine();
+	// check for raw mode first (should not be parsed)
+	if (this.rawMode) {
+		if (this.env.getPassword) {
+			// sample password handler (lineBuffer == stored username ?)
+			if (this.lineBuffer == this.env.username) {
+				this.user = this.env.username;
+				this.ps = '['+this.user+']>';
+				this.type('Welcome '+this.user+', you are now logged on to the system.');
+			}
+			else {
+				this.type('Sorry, Incorrect Username and Password Combination.');
+			}
+			this.env.username = '';
+			this.env.getPassword = false;
+		}
+		// leave in normal mode
+		this.rawMode = false;
+		this.prompt();
+		return;
+	}
+	// normal command parsing
+	// just call the termlib_parser with a reference of the calling Terminal instance
+	// parsed arguments will be imported in this.argv,
+	// quoting levels per argument in this.argQL (quoting character or empty)
+	// cursor for arguments is this.argc (used by Parser.getopt)
+	// => see 'termlib_parse.js' for configuration and details
+	parser.parseLine(this);
+	if (this.argv.length == 0) {
+		// no commmand line input
+	}
+	else if (this.argQL[0]) {
+	    // first argument quoted -> error
+		this.write("Runtime Syntax error: arg.First Quoted (LnX)");
+	}
+	else {
+		var cmd = this.argv[this.argc++];
+		/*
+		  process commands now
+		  1st argument: this.argv[this.argc]
+		*/
+		switch (cmd) {
+			case 'help':
+				this.write(helpPage);
+				break;
+			case 'clear':
+				// get options
+				var opts = parser.getopt(this, 'aA');
+				if (opts.a) {
+					// discard status line on opt "a" or "A"
+					this.maxLines = this.conf.rows;
+				}
+				this.clear();
+				break;
+			case 'number':
+				// test for value options
+				var opts = parser.getopt(this, 'n');
+				if (opts.illegals.length) {
+					this.type('Runtime error - illegal option. usage: number -n<value>');
+				}
+				else if ((opts.n) && (opts.n.value != -1)) {
+					this.type('option value: '+opts.n.value);
+				}
+				else {
+					this.type('usage: number -n<value>');
+				}
+				break;
+			case 'repeat':
+				// another test for value options
+				var opts = parser.getopt(this, 'n');
+				if (opts.illegals.length) {
+					this.type('Runtime error - illegal option. usage: repeat -n<value> <string>');
+				}
+				else if ((opts.n) && (opts.n.value != -1)) {
+					// first normal argument is again this.argv[this.argc]
+					var s = this.argv[this.argc];
+					if (typeof s != 'undefined') {
+						// repeat this string n times
+						var a = [];
+						for (var i=0; i<opts.n.value; i++) a[a.length] = s;
+						this.type(a.join(' '));
+					}
+				}
+				else {
+					this.type('usage: repeat -n<value> <string>');
+				}
+				break;
+			case 'login':
+				// sample login (test for raw mode)
+				if ((this.argc == this.argv.length) || (this.argv[this.argc] == '')) {
+					this.type('usage: login <username>');
+				}
+				else {
+					this.env.getPassword = true;
+					this.env.username = this.argv[this.argc];
+					this.write('%+iIf you have forgotten your credentials, Please speak to Matt at Network Services.%-i%n');
+					this.type('password: ');
+					// exit in raw mode (blind input)
+					this.rawMode = true;
+					this.lock = false;
+					return;
+				}
+				break;
+			case 'dump':
+				var opts = parser.getopt(this, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+				for (var p in opts) {
+					if (p == 'illegals') {
+						if (opts.illegals.length) {
+							this.type('  illegal options: "'+opts.illegals.join('", "')+'"');
+							this.newLine();
+						}
+					}
+					else {
+						this.type('  option "'+p+'" value '+opts[p].value);
+						this.newLine();
+					}
+				}
+				while (this.argc<this.argv.length) {
+					var ql = this.argQL[this.argc] || '-';
+					this.type('  argument [QL: '+ql+'] "'+this.argv[this.argc++]+'"');
+					this.newLine();
+				}
+				break;
+			case 'exit':
+				this.close();
+				return;
+			default:
+				// for test purpose just output argv as list
+				// assemble a string of style-escaped lines and output it in more-mode
+				s=' INDEX  QL  ARGUMENT%n';
+				for (var i=0; i<this.argv.length; i++) {
+					s += this.globals.stringReplace('%', '%%',
+							this.globals.fillLeft(i, 6) +
+							this.globals.fillLeft((this.argQL[i])? this.argQL[i]:'-', 4) +
+							'  "' + this.argv[i] + '"'
+						) + '%n';
+				}
+				this.write(s, 1);
+				return;
+		}
+	}
+	this.prompt();
+}
+
+
+//-->
+</script>
+
+<style type="text/css">
+
+/* essential terminal styles */
+
+.term {
+	font-family: courier,fixed,swiss,sans-serif;
+	font-size: 12px;
+	color: #33d011;
+	background: none;
+}
+.termReverse {
+	color: #111111;
+	background: #33d011;
+}
+
+/* other page styles */
+
+body,p,a,td {
+	font-family: courier,fixed,swiss,sans-serif;
+	font-size: 12px;
+	color: #cccccc;
+}
+.lh15 {
+	line-height: 15px;
+}
+a,a:link,a:visited {
+	text-decoration: none;
+	color: #77dd11;
+}
+a:hover {
+	text-decoration: underline;
+	color: #77dd11;
+}
+a:active {
+	text-decoration: underline;
+	color: #dddddd;
+}
+
+a.termopen,a.termopen:link,a.termopen:visited {
+	text-decoration: none;
+	color: #77dd11;
+	background: none;
+}
+a.termopen:hover {
+	text-decoration: none;
+	color: #222222;
+	background: #77dd11;
+}
+a.termopen:active {
+	text-decoration: none;
+	color: #222222;
+	background: #dddddd;
+}
+
+table.inventory td {
+	padding-bottom: 20px !important;
+}
+
+pre,tt {
+	font-family: courier,fixed,monospace;
+	color: #ccffaa;
+	font-size: 12px;
+	line-height: 15px;
+}
+.pale { color: #cceebb !important; }
+
+li {
+	line-height: 15px;
+	margin-bottom: 8px !important;
+}
+
+.dimmed,.dimmed *,.dimmed * * {
+	background-color: #222222 !important;
+	color: #333333 !important;
+}
+
+@media print {
+	body { background-color: #ffffff; }
+	body,p,a,td,li,tt {
+		color: #000000;
+	}
+	pre,.prop,.pale {
+		color: #000000;
+	}
+	h1 {
+		color: #000000;
+	}
+	a,a:link,a:visited {
+		color: #000000;
+	}
+	a:hover {
+		color: #000000;
+	}
+	a:active {
+		color: #000000;
+	}
+	table.inventory {
+		display: none;
+	}
+}
+
+</style>
+</head>
+
+
+<body bgcolor="#222222" link="#77dd11" text="#cccccc" alink="#dddddd" vlink="#77dd11"
+topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" marginheight="0" marginwidth="0">
+
+<a href="javascript:termOpen()" onfocus="if(this.blur)this.blur();" onmouseover="window.status='open terminal'; return true" onmouseout="window.status=''; return true" class="termopen">&gt; open terminal &nbsp;</a>	
+
+<div id="termDiv" style="position:absolute; visibility: hidden; z-index:1;"></div>
+</body>
+</html>
