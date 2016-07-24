@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+<title>gibbons.io</title>
+<body>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<style type="text/css">
+	/* base, reset, and utility */
+html { box-sizing: border-box; } *, *:before, *:after { box-sizing: inherit; }
+* { margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%;}
+.clearfix:after, .row:after { content: ""; display: table; clear: both; }
+
+/* typography */
+body {
+  color: #2B3437;
+  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Sans-serif;
+  font-size: 16px;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1 {
+  color: #444;
+  font-size: 24px;
+  font-weight: normal;
+  margin: 0 0 .7em;
+  padding: 12px 0;
+  text-align: center;
+}
+
+/* structure */
+.container {
+  margin: 0 auto;
+  max-width: 34em;
+  padding: 2.5em;
+  text-align: left;
+}
+.row {
+  clear: both;
+  margin-bottom: 1em;
+  width: 100%;
+}
+
+/* list */
+ul {
+  display: block;
+  list-style: none;
+  width: 100%;
+}
+ul li {
+  border-bottom: solid 1px #ccc;
+  color: #444;
+  cursor: pointer;
+  display: block;
+  padding: 13px 16px 12px;
+  text-transform: capitalize;
+}
+ul li:last-child {
+  border-bottom-color: transparent;
+}
+ul li:hover {
+  color: tomato;
+  text-decoration: line-through;
+}
+
+/* inputs */
+input[type=text] {
+  transition: border-color .2s ease, background-color .2s ease;
+
+  background: #fff;
+  border: none;
+  border-bottom: solid 2px #bbb;
+  border-radius: 0px;
+  line-height: normal;
+  padding: 12px 16px 12px;
+  width: 100%;
+}
+input[type=text]:hover {
+  border-color: #777;
+}
+input[type=text]:focus {
+  border-color: #5CACCA;
+  outline: none;
+}
+.group {
+  align-content: stretch;
+  align-items: flex-end;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+.group-fill {
+  display: inline-block;
+  margin: 0 auto;
+  order: 1;
+  flex-grow: 1;
+}
+.group-side {
+  display: inline-block;
+  margin: 0 auto;
+  order: 2;
+}
+
+/* input placeholder text */
+::-webkit-input-placeholder { color: #AAA; }
+::-moz-placeholder          { color: #AAA; }
+:-ms-input-placeholder      { color: #AAA; }
+
+/* button */
+.button {
+  background: #fff;
+  border: none;
+  border-bottom: solid 2px #5CACCA;
+  border-top: solid 1px transparent;
+  border-radius: 0px;
+  color: #5CACCA;
+  padding: 12px 16px;
+  margin-left: 2px;
+}
+.button:hover {
+  color: #79C8E5;
+  border-bottom-color: #79C5E1;
+}
+.button:focus {
+  outline: none;
+  border-bottom-color: #79C5E1;
+}
+
+#clear {
+  cursor: pointer;
+  text-decoration: none;
+  position: fixed;
+  right: 5px;
+  bottom: 5px;
+  background: white;
+  padding: 1em;
+  color: #888;
+  font-size: 12px;
+}
+#clear:hover {
+  color: tomato;
+}
+#clear strong {
+  font-size: 14px;
+  margin-left: 3px;
+}
+
+</style>
+<script type="text/javascript">
+	$(function(){
+  var db = localStorage;
+  var form = $('#task-form');
+  var list = $('#task-list');
+  var input = $('#task-input');
+  var clear = $('#clear');
+
+  logDB();
+  bindEvents();
+  renderAll();
+
+  function bindEvents(){
+    form.submit(function(event){
+      var task = input.val();
+      if (task !== "") {
+        create(task);
+        input.val('').focus();
+      }
+      logDB();
+      event.preventDefault();
+    });
+
+    list.on("click", "li", function(event){
+      key = $(this).attr('id');
+      complete(key);
+      logDB();
+    });
+
+    clear.click(function(event){
+      clearDB();
+      logDB();
+    });
+  }
+
+  function render(key){
+    list.append("<li id='" + key + "'>" + db.getItem(key) + "</li>");
+  }
+
+  function renderAll(){
+    for (var i = 0; i < db.length; i++) {
+      var key = db.key(i);
+      render(key);
+    }
+  }
+
+  function create(task){
+    var count = db.length + 1;
+    var time = Date.now();
+    var key = "key-" + time + count;
+
+    db.setItem(key, task);
+    render(key);
+  }
+
+  function complete(key){
+    db.removeItem(key);
+    $('#' + key).remove();
+  }
+
+  function clearDB(){
+    db.clear();
+    list.empty();
+  }
+
+  function logDB(){
+    // console.clear();
+    console.log(db);
+  }
+});
+
+</script>
+<div class="wrapper">
+      <div class="container">
+        <h1>To-do</h1>
+
+        <form id="task-form">
+          <div class="group">
+            <div class="group-fill">
+              <input type="text" id="task-input" placeholder="Type your task..." autofocus>
+            </div>
+            <div class="group-side">
+              <input class="button" type="submit" value="Add Task">
+            </div>
+          </div>
+        </form>
+
+        <ul id="task-list"></ul>
+
+        <span id="clear">Clear Tasks</span>
+      </div>
+    </div>
+</body>
+</html>
