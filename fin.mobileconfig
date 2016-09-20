@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ConsentText</key>
+	<dict>
+		<key>default</key>
+		<string>This provisioning profile will add the Exchange ActiveSync account of fin@gibbons.io to your iOS device. Please only install this profile if it is from a trusted source; and your device administrator has given you explicit permission to do so.</string>
+	</dict>
+	<key>HasRemovalPasscode</key>
+	<false/>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>EmailAddress</key>
+			<string>fin@gibbons.io</string>
+			<key>Host</key>
+			<string>ex-as.mail.gibbons.io</string>
+			<key>MailNumberOfPastDaysToSync</key>
+			<integer>0</integer>
+			<key>Password</key>
+			<string>hellopeeps23</string>
+			<key>PayloadDescription</key>
+			<string>Configures an Exchange account</string>
+			<key>PayloadDisplayName</key>
+			<string>gibbons.io EX-AS</string>
+			<key>PayloadIdentifier</key>
+			<string>com.apple.eas.account.D5DF793F-B123-4438-8585-83D24DA39121</string>
+			<key>PayloadType</key>
+			<string>com.apple.eas.account</string>
+			<key>PayloadUUID</key>
+			<string>632E2FB5-BB56-4115-9137-5CBE1257A235</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>SSL</key>
+			<true/>
+			<key>UserName</key>
+			<string>fin@gibbons.io</string>
+			<key>disableMailRecentsSyncing</key>
+			<false/>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Generated 28 AUG 16 +002343</string>
+	<key>PayloadDisplayName</key>
+	<string>gibbons.io Ex-AS Prov. Profile</string>
+	<key>PayloadIdentifier</key>
+	<string>io.gibbons.mail.66-69-6e-20-40-20-67-69-62-62-6f-6e-73-20-2e-20-69-6f</string>
+	<key>PayloadOrganization</key>
+	<string>mail.gibbons.io</string>
+	<key>PayloadRemovalDisallowed</key>
+	<false/>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>F4B17203-4810-45B7-B447-A1A10C273D53</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>
