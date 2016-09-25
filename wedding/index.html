@@ -6,6 +6,9 @@
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<script type="text/javascript" src="http://gibbons.io/weddding/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="http://gibbons.io/weddding/js/jquery.scrollTo.js"></script>
+
 <style>
 /* Define .ttf To use as main page font */
 
@@ -68,17 +71,23 @@ body, html {
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <ul class="w3-navbar" id="myNavbar">
-    <li><a href="#" class="w3-padding-large">HOME</a></li>
+    <li><a href="#home" class="w3-padding-large">HOME</a></li>
+    <li><a href="#about" class="w3-padding-large">ABOUT</a></li>
+    <li><a href="#portfolio" class="w3-padding-large">MENU</a></li>
+    <li><a href="#venue" class="w3-padding-large">VENUE</a></li>
   </ul>
 </div>
 
+<section id="home" class="section">
 <!-- First Parallax Image with Logo Text -->
 <div class="bgimg-1 w3-opacity w3-display-container">
   <div class="w3-display-middle" style="white-space:nowrap;">
     <span class="w3-center w3-padding-xlarge w3-black w3-xlarge w3-wide w3-animate-opacity"><img src="http://gibbons.io/wedding/logo.png" />
   </div>
 </div>
+</section>
 
+<section id="about" class="section">
 <!-- Container (About Section) -->
 <div class="w3-content w3-container w3-padding-64" id="about">
   <h3 class="w3-center">WELCOME</h3>
@@ -98,7 +107,9 @@ body, html {
     </div>
   </div>
 </div>
+</section>
 
+<section id="portfolio" class="section">
 <!-- Second Parallax Image with Portfolio Text -->
 <div class="bgimg-2 w3-display-container">
   <div class="w3-display-middle">
@@ -156,6 +167,9 @@ body, html {
     <img id="img01" style="max-width:100%">
   </div>
 </div>
+</section>
+
+<section id="venue" class="section">
 
 <!-- Third Parallax Image with Portfolio Text -->
 <div class="bgimg-3 w3-display-container">
@@ -194,7 +208,7 @@ body, html {
     </div>
   </div>
 </div>
-
+</section>
 <!-- Footer -->
 <footer class="w3-center w3-dark-grey w3-padding-48 w3-hover-black">
   <p>some text will go here <a href="#" title="W3.CSS" target="_blank" class="w3-hover-opacity">lol wedding</a></p>
@@ -234,6 +248,14 @@ function myFunction() {
         navbar.className = navbar.className.replace(" w3-card-2 w3-animate-top w3-white", "");
     }
 }
+</script>
+<script>
+$(function(){
+  $("#nav a").click(function(e){
+    e.preventDefault();
+    $('html,body').scrollTo(this.hash,this.hash); 
+  });
+});
 </script>
 
 </body>
