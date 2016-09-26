@@ -54,34 +54,30 @@ body, html {
 }
 /* Create a Parallax Effect */
 
-.bgimg-1 {
-    opacity: 66%;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: stretch;
-}
 
-.bgimg-2, .bgimg-3 {
+
+.bgimg-1, .bgimg-2, .bgimg-3 {
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
 }
 /* First image (Logo. Full height) */
 .bgimg-1 {
     background-image: url('http://gibbons.io/wedding/bg0.jpeg');
     min-height: 100%;
+    background-size: 100% 100%;
 }
 /* Second image (Portfolio) */
 .bgimg-2 {
     background-image: url("http://gibbons.io/wedding/bg0.jpeg");
     min-height: 400px;
+        background-size: cover;
 }
 /* Third image (Contact) */
 .bgimg-3 {
     background-image: url("http://gibbons.io/wedding/bg0.jpeg");
     min-height: 400px;
+        background-size: cover; 
 }
 .w3-wide {letter-spacing: 10px;}
 .w3-hover-opacity {cursor: pointer;}
