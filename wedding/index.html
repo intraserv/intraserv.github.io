@@ -1,25 +1,101 @@
-
-<!DOCTYPE html>
 <html>
-<title>Ryan and Nicci</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-<script type="text/javascript" src="http://gibbons.io/weddding/js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="http://gibbons.io/weddding/js/jquery.scrollTo.js"></script>
 
-<style>
+<head>
+<title>Nicci Ryan</title>
+<!-- Include CSS File Here -->
+<link rel="stylesheet" href="css/style.css"/>
+<style type="text/css">
 
+/* Bordered form */
+form {
+    width: 25%;
+    position: center;
+  text-align: center;
+  margin: 0 auto;
+
+
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Extra style for the cancel button (red) */
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+/* Avatar image */
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+/* Add padding to containers */
+.container {
+    padding: 16px;
+}
+
+/* The "Forgot password" text */
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}
+
+	
 #justified {
   
   text-align: justify;
 }
 
 html, body {
+	font-family: Arial, Helvetica, sans-serif;
     height: 100%;
     margin: 0;
     padding: 0;
+    background-image: url('http://gibbons.io/wedding/bg0.jpeg');
+    min-height: 100%;
+    background-size: cover;
+        background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+        background-size: 100% 100%;
 }
 
 img {
@@ -97,174 +173,70 @@ body, html {
         background-attachment: scroll;
     }
 }
+
+#loginform {
+
+    position: absolute;
+    top: 50%;
+    z-index: 100;
+    color: black;
+
+    height: 400px;
+    margin-top: -200px;
+
+    width: 100%;
+    text-align: center;
+    align-content: center;
+
+}
+
+
 </style>
+<!-- Include JS File Here -->
+<script src="js/login.js"></script>
+</head>
 <body>
-
-<!-- Navbar (sit on top) -->
-<div class="w3-top w3-hide-small">
-  <ul class="w3-navbar" id="myNavbar">
-    <li><a href="#home" class="w3-padding-large">HOME</a></li>
-    <li><a href="#about" class="w3-padding-large">ABOUT</a></li>
-    <li><a href="#portfolio" class="w3-padding-large">MENU</a></li>
-    <li><a href="#venue" class="w3-padding-large">VENUE</a></li>
-    <li><a href="#registry" class="w3-padding-large">HONEYMOON FUND</a></li>
-
-  </ul>
+<div class="container">
+<div class="main">
+<div class="w3-content w3-container w3-padding-64 w3-center" id="about">
+<div class="w3-row">
+<div id="loginform">
+<h2>Please Log In:</h2>
+<form> 
+<input type="text" name="userid"/>
+<input type="button" onclick="LogIn(this.form)" value="Login"/>
+</form>
+</div>
+</div>
+</div>
+</div>
 </div>
 
-<!-- First Parallax Image with Logo Text -->
-<div class="bgimg-1 w3-display-container">
-  <div class="w3-display-middle" style="white-space:nowrap;">
-    <span class="w3-center w3-padding-xlarge w3-xlarge w3-wide w3-animate-opacity center fit" width=100%><img src="http://gibbons.io/wedding/logo.png" />
-    </span>
-    </div>
-</div>
+<script language="javascript">
 
 
-<section id="about" class="section">
-<!-- Container (About Section) -->
-<div class="w3-content w3-container w3-padding-64" id="about">
-  <h3 class="w3-center">WELCOME</h3>
-  <p class="w3-center">“you come to love, not by finding the perfect person, but by learning to see an imperfect person perfectly”</p>
-  <div class="w3-row">
 
-    <!-- Hide this text on small devices -->
-    <div class="m6 w3-hide-small w3-section" id="justified">
-      <p>Welcome to the perfectly imperfect world of Nicci and Ryan. It’s not long now until these worlds are joined in Holy Madtrimony!!!! We are delighted, excited, scared stiff of what’s about to take place and we would be honoured if you could join us and provide some much needed moral support. 
 
-We were brought together by the World wide web, nothing as romantic as a drunken 2am snog in a spit and sawdust club, nor an equally romantic office romance. We were unaware that each other existed despite the fact we may well have slept in the same tent at Cuffley camp back in the early 80’s, or been sat across the table from each other at Bushey sports club whilst tucking into a perfectly average sunday roast.
 
-Ironically our first date was a Sunday lunch at a mutually agreeable pub in Bearsted, we spent most of the date critiquing a table of four and their choice of knitted jumpers. I think this was a blessed relief for both of us as first dates tend to be awkward, nervous occasions. 
-
-Two years have passed, flown by in fact (not a knitted jumper in sight). </br> </br> And here we are, arranging our wedding. Together and with the love and support of our boys and our family and friends we realised that we have experienced most of the things life can throw at us and that it was time we made things official. I met Nicci at a time in my life when i couldn’t imagine what my future held, from the moment i saw her get out of her car in the carpark of that pub I knew my life was about to change. But i didn’t realise just how much. I’m not a religious man, but i really have been blessed. She appears to see an imperfect person perfectly (should’ve gone to Specsavers)
-
-So please dust off your glad rags, make sure you’ve eaten, because we intend to kick off the rest of our lives in style with the assistance of an alcoholic drink or two and would love to do so in the company of our friends and families. 
-
-See you there xxx</p>
-    </div>
-  </div>
-</div>
-</section>
-
-<section id="portfolio" class="section">
-<!-- Second Parallax Image with Portfolio Text -->
-<div class="bgimg-2 w3-display-container">
-  <div class="w3-display-middle">
-    <span class="w3-xxlarge w3-text-black w3-wide">MENU</span>
-  </div>
-</div>
-
-<!-- Container (Portfolio Section) -->
-<div class="w3-content w3-container w3-padding-64">
-  <h3 class="w3-center">you can eat here too</h3>
-  <p class="w3-center"><em>here will be a table of the foods lol<br> click on images to make them bigger (will be replaced with text)</em></p><br>
-
-  <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
-  
-</div>
-
-<!-- Modal for full size images on click-->
-
-<section id="venue" class="section">
-
-<!-- Third Parallax Image with Portfolio Text -->
-<div class="bgimg-3 w3-display-container">
-  <div class="w3-display-middle">
-     <span class="w3-xxlarge w3-text-black w3-wide">CONTACT</span>
-  </div>
-</div>
-
-<!-- Container (Contact Section) -->
-<div class="w3-content w3-container w3-padding-64">
-  <h3 class="w3-center">VENUE DETAILS</h3>
-  <p class="w3-center"><em>put dis into your gps thingy or get the train i couldnt care less</em></p>
-
-  <div class="w3-row w3-padding-32 w3-section">
-    <div class="w3-col m4 w3-container">
-      <!-- Add Google Maps -->
-      <div id="googleMap" class="w3-round-large"></div>
-    </div>
-    <div class="w3-col m8 w3-container w3-section">
-      <div class="w3-large w3-margin-bottom">
-        <i class="fa fa-map-marker w3-hover-text-black" style="width:30px"></i> London, UK<br>
-        <i class="fa fa-phone w3-hover-text-black" style="width:30px"></i> call me bb 07946589586<br>
-        <i class="fa fa-envelope w3-hover-text-black" style="width:30px"> </i> dont email me, send a carrier pidgeon<br>
-      </div>
-      <p>RSVP</p>
-      <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
-        <div class="w3-half">
-          <input class="w3-input w3-border w3-hover-light-grey" type="text" placeholder="Name">
-        </div>
-        <div class="w3-half">
-          <input class="w3-input w3-border w3-hover-light-grey" type="text" placeholder="Email">
-        </div>
-      </div>
-      <input class="w3-input w3-border w3-hover-light-grey" type="text" placeholder="Comment">
-      <button class="w3-btn w3-section w3-right">SEND</button>
-    </div>
-  </div>
-</div>
-</section>
-<!-- Footer -->
-<footer class="w3-center w3-dark-grey w3-padding-48 w3-hover-black">
-  <p>Website design by<a href="http://gibbons.io/" title="gibbons.io" target="_blank" class="w3-hover-opacity">gibbons.io</a></p>
-  <p>Copyright stanwaymcswan.wedding 2016-2017. All rights reserved.</p>
-</footer>
- 
-<!-- Add Google Maps -->
-<script src="http://maps.googleapis.com/maps/api/js"></script>
-<script>
-var myCenter = new google.maps.LatLng(41.878114, -87.629798);
-function initialize() {
-var mapProp = {
-  center: myCenter,
-  zoom: 12,
-  scrollwheel: false,
-  draggable: false,
-  mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-var marker = new google.maps.Marker({
-  position: myCenter,
-});
-marker.setMap(map);
+function LogIn(form){
+loggedin=false;
+username="";
+password="";
+username=form.userid.value
+username=username.toLowerCase();
+if (username == "daytime" || username == "daytona") { 
+loggedin=true;
+window.location="dtg.html";
 }
-google.maps.event.addDomListener(window, 'load', initialize);
-// Modal Image Gallery
-function onClick(element) {
-  document.getElementById("img01").src = element.src;
-  document.getElementById("modal01").style.display = "block";
+if (username == "evening") {
+loggedin=true;
+window.location="eg.html";
 }
-// Change style of navbar on scroll
-window.onscroll = function() {myFunction()};
-function myFunction() {
-    var navbar = document.getElementById("myNavbar");
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-        navbar.className = "w3-navbar" + " w3-card-2" + " w3-animate-top" + " w3-white";
-    } else {
-        navbar.className = navbar.className.replace(" w3-card-2 w3-animate-top w3-white", "");
-    }
+if (loggedin==false) {
+alert("Surname not Recognised.");
 }
-</script>
-<script>
-$(function(){
-  $("#nav a").click(function(e){
-    e.preventDefault();
-    $('html,body').scrollTo(this.hash,this.hash); 
-  });
-});
-</script>
+}
 
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" language="JavaScript">
-  function set_body_height() { // set body height = window height
-    $('body').height($(window).height());
-  }
-  $(document).ready(function() {
-    $(window).bind('resize', set_body_height);
-    set_body_height();
-  });
 </script>
-
 </body>
 </html>
