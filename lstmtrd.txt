@@ -1,93 +1,251 @@
-from __future__ import print_function
-from keras.models import Sequential
-from keras.layers import Dense, Activation
-from keras.layers import LSTM
-from keras.optimizers import RMSprop
-from keras.utils.data_utils import get_file
-import numpy as np
-import random
-import sys
 
-path = get_file('trainingdata_beemoviescript.txt', origin='http://gibbons.io/trainingdata.txt')
-text = open(path).read().lower()
-print('corpus length:', len(text))
+It feels like a perfect night to dress up like hipsters
+And make fun of our exes, uh uh, uh uh.
+It feels like a perfect night for breakfast at midnight
+To fall in love with strangers, uh uh, uh uh.
 
-chars = sorted(list(set(text)))
-print('total chars:', len(chars))
-char_indices = dict((c, i) for i, c in enumerate(chars))
-indices_char = dict((i, c) for i, c in enumerate(chars))
+Yeah,
+We're happy, free, confused, and lonely at the same time
+It's miserable and magical.
+Oh, yeah
+Tonight's the night when we forget about the deadlines
+It's time
 
-# cut the text in semi-redundant sequences of maxlen characters
-maxlen = 40
-step = 3
-sentences = []
-next_chars = []
-for i in range(0, len(text) - maxlen, step):
-    sentences.append(text[i: i + maxlen])
-    next_chars.append(text[i + maxlen])
-print('nb sequences:', len(sentences))
+Uh oh!
+I don't know about you
+But I'm feeling 22
+Everything will be alright
+If you keep me next to you
+You don't know about me
+But I'll bet you want to
+Everything will be alright
+If we just keep dancing like we're
+22, ooh-ooh
+22, ooh-ooh
 
-print('Vectorization...')
-X = np.zeros((len(sentences), maxlen, len(chars)), dtype=np.bool)
-y = np.zeros((len(sentences), len(chars)), dtype=np.bool)
-for i, sentence in enumerate(sentences):
-    for t, char in enumerate(sentence):
-        X[i, t, char_indices[char]] = 1
-    y[i, char_indices[next_chars[i]]] = 1
+It seems like one of those nights,
+This place is too crowded.
+Too many cool kids, uh uh, uh uh (who's Taylor Swift anyway, ew?)
+It seems like one of those nights,
+We ditch the whole scene and end up dreaming
+Instead of sleeping.
 
+Yeah,
+We're happy, free, confused, and lonely in the best way
+It's miserable and magical.
+Oh, yeah
+Tonight's the night when we forget about the heartbreaks
+It's time
 
-# build the model: a single LSTM
-print('Build model...')
-model = Sequential()
-model.add(LSTM(128, input_shape=(maxlen, len(chars))))
-model.add(Dense(len(chars)))
-model.add(Activation('softmax'))
+Uh oh! (hey!)
+I don't know about you
+But I'm feeling 22
+Everything will be alright
+If you keep me next to you
+You don't know about me
+But I'll bet you want to
+Everything will be alright (alright)
+If we just keep dancing like we're
+22, ooh-ooh (oh, oh, oh)
+22, ooh-ooh
+I don't know about you
+22, ooh-ooh
+22, ooh-ooh
 
-optimizer = RMSprop(lr=0.01)
-model.compile(loss='categorical_crossentropy', optimizer=optimizer)
+It feels like one of those nights,
+We ditch the whole scene.
+It feels like one of those nights,
+We won't be sleeping.
+It feels like one of those nights,
+You look like bad news.
+I gotta have you,
+I gotta have you.
 
+Ooh-ooh
+Ooh-ooh, ye-e-e-e-eah, hey
+I don't know about you (I don't know about you)
+But I'm feeling 22
+Everything will be alright
+If you keep me next to you
+You don't know about me (you don't know about me)
+But I'll bet you want to
+Everything will be alright
+If we just keep dancing like we're
+22, ooh-ooh
+22, ooh-ooh
+22, ooh-ooh, yeah, yeah
+22, ooh-ooh, yeah, yeah, yeah
 
-def sample(preds, temperature=1.0):
-    # helper function to sample an index from a probability array
-    preds = np.asarray(preds).astype('float64')
-    preds = np.log(preds) / temperature
-    exp_preds = np.exp(preds)
-    preds = exp_preds / np.sum(exp_preds)
-    probas = np.random.multinomial(1, preds, 1)
-    return np.argmax(probas)
+It feels like one of those nights,
+We ditch the whole scene
+It feels like one of those nights,
+We won't be sleeping
+It feels like one of those nights,
+You look like bad news,
+I gotta have you,
+I gotta have you.
+[Chorus 1:]
+Why would you wanna break a perfectly good heart?
+Why would you wanna take our love and tear it all apart,now?
+Why would you wanna make the very first scar?
+Why would you wanna break a perfectly good heart?
 
-# train the model, output generated text after each iteration
-for iteration in range(1, 60):
-    print()
-    print('-' * 50)
-    print('Iteration', iteration)
-    model.fit(X, y, batch_size=128, epochs=1)
+Maybe I should've seen the signs, should've read the writing on the wall.
+And realized by the distance in your eyes that I would be the one to fall.
+No matter what you say, I still can't believe
+That you would walk away.
+It don't make sense to me, but:
 
-    start_index = random.randint(0, len(text) - maxlen - 1)
+[Repeat Chorus 1:]
+Why would you wanna break a perfectly good heart?
+Why would you wanna take our love and tear it all apart, now?
+Why would you wanna make the very first scar?
+Why would you wanna break a perfectly good heart?
 
-    for diversity in [0.2, 0.5, 1.0, 1.2]:
-        print()
-        print('----- diversity:', diversity)
+It's not unbroken anymore.
+How do I get it back the way it was before?
 
-        generated = ''
-        sentence = text[start_index: start_index + maxlen]
-        generated += sentence
-        print('----- Generating with seed: "' + sentence + '"')
-        sys.stdout.write(generated)
+[Chorus 2:]
+Why would you wanna break a perfectly good heart?
+Why would you wanna take our love and tear it all apart,now?
+Why would you wanna make the very first scar?
+Why would you wanna break, would you wanna break a:
 
-        for i in range(400):
-            x = np.zeros((1, maxlen, len(chars)))
-            for t, char in enumerate(sentence):
-                x[0, t, char_indices[char]] = 1.
+[Repeat Chorus 1:]
+Why would you wanna break a perfectly good heart?
+Why would you wanna take our love and tear it all apart, now?
+Why would you wanna make the very first scar?
+Why would you wanna break a perfectly good heart?
+I don't know what I want, so don't ask me
+Cause I'm still trying to figure it out
+Don't know what's down this road, I'm just walking
+Trying to see through the rain coming down
+Even though I'm not the only one
+Who feels the way I do
 
-            preds = model.predict(x, verbose=0)[0]
-            next_index = sample(preds, diversity)
-            next_char = indices_char[next_index]
+[Chorus:]
+I'm alone, on my own, and that's all I know
+I'll be strong, I'll be wrong, oh but life goes on
+Oh, I'm just a girl, trying to find a place in this world
 
-            generated += next_char
-            sentence = sentence[1:] + next_char
+Got the radio on, my old blue jeans
+And I'm wearing my heart on my sleeve
+Feeling lucky today, got the sunshine
+Could you tell me what more do I need
+And tomorrow's just a mystery, oh yeah
+But that's ok
 
-            sys.stdout.write(next_char)
-            sys.stdout.flush()
-        print()
+[Chorus]
 
+Maybe I'm just a girl on a mission
+But I'm ready to fly
+
+I'm alone, on my own, and that's all I know
+I'll be strong, I'll be wrong, oh but life goes on
+Oh I'm alone, on my own, and that's all I know
+Oh I'm just a girl, trying to find a place in this world
+
+Oh I'm just a girl
+Oh I'm just a girl, oh, oh,
+Oh I'm just a girl
+The way you look, the way you laugh,
+The way you love with all you have,
+There ain't nothing bout you that don't do something for me
+
+Once I thought that love was something I could never do
+Never knew that I could feel this much
+But this yearning in the deep part of my heart for you
+Is more than a reaction to your touch
+It's a perfect passion and I can't get enough
+
+The way you look, the way you laugh,
+The way you love with all you have,
+There ain't nothing bout you that don't do something for me
+The way you kiss, The way you cry,
+The way you move when you walk by
+There's ain't nothing bout you (there ain't nothing bout you)
+That don't do something for me
+
+wahooahoo
+
+In my life I've been hammered by some heavy blows
+That never knocked me off my feet
+All you gotta do is smile at me and down I go
+And baby it's no mystery why I surrender
+Girl you got everything
+
+The way you look, the way you laugh,
+The way you love with all you have,
+There ain't nothing bout you that don't do something for me
+The way you kiss, The way you cry,
+The way you move when you walk by
+There ain't nothing bout you (there ain't nothing bout you)
+That don't do something for me
+
+I love your attitude, your rose tattoo, your every thought
+Your smile, you lips and girl the list goes on and on and on
+
+The way you look, the way you laugh,
+The way you love with all you have,
+There ain't nothing bout you that don't do something for me
+The way you kiss, The way you cry,
+The way you move when you walk by
+There ain't nothing bout you (there ain't nothing bout you)
+That don't do something for me
+
+The way you look, the way you laugh,
+The way you love with all you have,
+Your dance, your drive, You make me feel alive
+
+The way you talk, the way you tease
+By now I think you see that
+There ain't nothing bout you that don't do something for me
+All the other kids with the pumped up kicks
+You better run
+You better run
+Outrun my gun
+
+All the other kids with the pumped up kicks
+You better run
+You better run
+Faster than my bullet
+
+Ellen works a long day
+Giving weird interviews in a slick, cool sweater
+And it gets kinda weird
+Yeah, calling us like we're boyfriend and girlfriend
+
+But it's not cause were just sitting here
+And we got cat videos and dance on Betty White and stuff
+And it's always gonna get weird
+Cause this song is all about Ellen
+
+Every single time I come on this show
+It's really weird
+Really weird
+All because of Ellen
+
+Every single time I come on this show
+It's really weird
+Really weird
+Always end up dancing
+
+I've been on this show
+Eight times now and I still remember
+Ellen hiding in the bathroom with a hidden camera
+And she scared me so bad and I fell and I could of died
+
+She's always asks me who I'm dating
+Every time I'm on this show
+And I don't even know why
+But it gets five million hits on youtube
+
+Cause, Every single time I come on this show
+It's really weird
+Really weird
+All because of Ellen
+
+Every single time I come on this show
+It's really weird
+Really weird
+Always end up dancing
