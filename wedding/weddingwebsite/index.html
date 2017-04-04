@@ -1,0 +1,242 @@
+<html>
+
+<head>
+<title>Nicci Ryan</title>
+<!-- Include CSS File Here -->
+<link rel="stylesheet" href="css/style.css"/>
+<style type="text/css">
+
+/* Bordered form */
+form {
+    width: 25%;
+    position: center;
+  text-align: center;
+  margin: 0 auto;
+
+
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Extra style for the cancel button (red) */
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+/* Avatar image */
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+/* Add padding to containers */
+.container {
+    padding: 16px;
+}
+
+/* The "Forgot password" text */
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}
+
+	
+#justified {
+  
+  text-align: justify;
+}
+
+html, body {
+	font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-image: url('http://gibbons.io/wedding/bg0.jpeg');
+    min-height: 100%;
+    background-size: cover;
+        background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+        background-size: 100% 100%;
+}
+
+img {
+    padding: 0;
+    display: block;
+    margin: 0 auto;
+    max-height: 100%;
+    max-width: 100%;
+}
+/* Define .ttf To use as main page font */
+  .fit { /* set relative picture size */
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .center {
+    display: block;
+    margin: auto;
+  }
+
+
+@font-face {
+    font-family: 'webding';
+    src: url(http://gibbons.io/weddding/webfont.ttf);
+    font-weight:400;
+}
+
+h3 {
+  color: black;
+}
+
+body,h1,h2,h3,h4,h5,h6 {font-family: Arial, Helvetica, sans-serif;}
+body, html {
+    height: 100%;
+    color: #777;
+    line-height: 1.8;
+}
+/* Create a Parallax Effect */
+
+
+
+.bgimg-1, .bgimg-2, .bgimg-3 {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+        background-size: 100% 100%;
+}
+/* First image (Logo. Full height) */
+.bgimg-1 {
+    background-image: url('http://gibbons.io/wedding/bg0.jpeg');
+    min-height: 100%;
+}
+/* Second image (Portfolio) */
+.bgimg-2 {
+    background-image: url("http://gibbons.io/wedding/bg0.jpeg");
+    min-height: 400px;
+        background-size: cover;
+}
+/* Third image (Contact) */
+.bgimg-3 {
+    background-image: url("http://gibbons.io/wedding/bg0.jpeg");
+    min-height: 400px;
+        background-size: cover; 
+}
+.w3-wide {letter-spacing: 10px;}
+.w3-hover-opacity {cursor: pointer;}
+#googleMap {
+    width: 100%;
+    height: 400px;
+    -webkit-filter: grayscale(90%);
+    filter: grayscale(90%);
+}
+/* Turn off parallax scrolling for tablets and mobiles */
+@media only screen and (max-width: 1024px) {
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+        background-attachment: scroll;
+    }
+}
+
+#loginform {
+
+    position: absolute;
+    top: 50%;
+    z-index: 100;
+    color: black;
+
+    height: 400px;
+    margin-top: -200px;
+
+    width: 100%;
+    text-align: center;
+    align-content: center;
+
+}
+
+
+</style>
+<!-- Include JS File Here -->
+<script src="js/login.js"></script>
+</head>
+<body>
+<div class="container">
+<div class="main">
+<div class="w3-content w3-container w3-padding-64 w3-center" id="about">
+<div class="w3-row">
+<div id="loginform">
+<h2>Please Enter Surname:</h2>
+<form> 
+<input type="text" name="userid"/>
+<input type="button" onclick="LogIn(this.form)" value="Login"/>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script language="javascript">
+
+
+
+
+
+function LogIn(form){
+loggedin=false;
+username="";
+password="";
+username=form.userid.value
+username=username.toLowerCase();
+if (username == "daytime" || username == "daytona") { 
+loggedin=true;
+window.location="dtg.html";
+}
+if (username == "evening") {
+loggedin=true;
+window.location="eg.html";
+}
+if (loggedin==false) {
+alert("Surname not Recognised. Please check spelling.");
+}
+}
+
+</script>
+</body>
+</html>
