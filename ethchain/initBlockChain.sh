@@ -1,0 +1,1 @@
+geth --datadir ethchain init CustomGenesis.json
