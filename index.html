@@ -5,25 +5,24 @@
   #holder {font-family: "Courier New", Courier, monospace
 }
 .typed-cursor{
-    opacity: 1;
-    -webkit-animation: blink 0.7s infinite;
-    -moz-animation: blink 0.7s infinite;
-    animation: blink 0.7s infinite;
+  opacity: 1;
+  animation: typedjsBlink 0.7s infinite;
+  -webkit-animation: typedjsBlink 0.7s infinite;
+  animation: typedjsBlink 0.7s infinite;
 }
-@keyframes blink{
-    0% { opacity:1; }
-    50% { opacity:0; }
-    100% { opacity:1; }
+@keyframes typedjsBlink{
+  50% { opacity: 0.0; }
 }
-@-webkit-keyframes blink{
-    0% { opacity:1; }
-    50% { opacity:0; }
-    100% { opacity:1; }
+@-webkit-keyframes typedjsBlink{
+  0% { opacity: 1; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1; }
 }
-@-moz-keyframes blink{
-    0% { opacity:1; }
-    50% { opacity:0; }
-    100% { opacity:1; }
+.typed-fade-out{
+  opacity: 0;
+  transition: opacity .25s;
+  -webkit-animation: 0;
+  animation: 0;
 }
   </style>
     <meta charset="utf-8">
@@ -37,7 +36,7 @@
     <script>
         $(function(){
             $('#story').typed({
-                strings: ["my bedroom feels warm,^300 but it's cold outside.^1000 i can tell because of the foggy windows.^1000 i think about it for a minute,^400 there are things you know but you can't feel^150 and there are things you can feel,^100 but you don't know how to explain.^1000"],
+                strings: ["my bedroom feels warm,^600 but it's cold outside.^1500 i can tell because of the foggy windows.^1500 i think about it for a minute,^400 there are things you know but you can't feel^400 and there are things you can feel,^300 but^200 you don't know how to explain.^2000 how did we get to this point?^1000 i once thought that my present and yours would go hand in hand.^1000 we were energy interacting^400 two souls toying to change each other's lives.^1000 looking at you was like looking into the lake.^2500 i wish i could be young forever,^700 not for leisure,^700 but to keep trying until this works^300 .^300 .^300 .^600 time destroys more than it creates.^700 it's not good for me.^700 for better or for worse,^400 we had to share existence,^400 isn't that funny?^1500 many have seen the same moon as us,^400 but how many saw it that same night^400 in that same instant?^1000 we were a silence between two special songs,^1000 silence that is also music in itself,^700 a trace,^400 faded silhouettes,^400 not strangers,^1000 never strangers.^2500 i'm so lost in my thoughts...^300 i can't tell the difference between dreams and reality anymore.^700 and if what i imagined with you was never real,^500 then i'll just keep lying to myself.^2000 it's better that way.^1000 i don't expect to change fate,^700 i don't have any chances left,^700 i try to romanticize failiure and learn to love without owning,^600 that could work,^200 i guess.^1500 you hide within every single thing i sense,^1000 you can only be seen if i focus long enough.^1000 i can't feel you but i know you're there.^1000 i will know it every time i look through my window.^2500 you are the cold outside,^2000 i am the warmth of my bedroom."],
                 typeSpeed: 20,
                 backDelay: 500,
                 loop: false,
