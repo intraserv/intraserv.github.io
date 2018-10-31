@@ -1,0 +1,59 @@
+<!doctype html>
+<title>gibbons (dot) io.</title>=
+<style>
+#screen_container {
+position:fixed;
+    top: 50%;
+    left: 50%;
+    width:30em;
+    height:18em;
+    margin-top: -9em; /*set to a negative number 1/2 of your height*/
+    margin-left: -15em; /*set to a negative number 1/2 of your width*/
+}
+body {
+background-color : black;
+}
+    #logo {
+        font-size: 100px;
+        font-weight: bold;
+	text-align: center;
+        font-family: "Helvetica", Arial, sans-serif;
+        margin: 50px;
+        color: #333;
+        font-size: 20px;
+    }
+</style>
+<script src="libv86.js"></script>
+<script>
+"use strict";
+
+window.onload = function()
+{
+    var emulator = window.emulator = new V86Starter({
+        memory_size: 1024 * 1024 * 1024,
+        vga_memory_size: 256 * 1024 * 1024,
+        screen_container: document.getElementById("screen_container"),
+        bios: {
+            url: "seabios.bin",
+        },
+        vga_bios: {
+            url: "vgabios.bin",
+        },
+        fda: {
+            url: "gibbonsdotio_custom.img",
+        },
+        autostart: true,
+    });
+}
+</script>
+
+<!-- A minimal structure for the ScreenAdapter defined in browser/screen.js -->
+<body>
+        <div id="logo">
+            <h1> gibbons (dot) io.</h1>
+        </div>
+<div id="screen_container">
+    <div style="white-space: pre; font: 14px monospace; line-height: 14px; height: 768px; width: 1024px;"></div>
+    <canvas style="display: none"></canvas>
+</div>
+</body>
